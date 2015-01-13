@@ -1,0 +1,23 @@
+<md-bottom-sheet class="md-list md-has-header">
+  <div layout="row">
+    <div flex="90"></div>
+    <div flex="10"><md-button style="float: right;" aria-label="Close Details" ng-click="closeBottom()">Close X</md-button></div>
+  </div>
+  <md-list>
+    <!--TODO Notifications-->
+    <md-switch ng-model="user.notifications" aria-label="switch notifications">Notifications: {{ user.notifications ? 'Off' : 'On' }}</md-switch>
+    <!--TODO Sounds-->
+    <md-switch ng-model="user.sounds" aria-label="switch notifications">Sounds: {{ user.sounds ? 'Off' : 'On' }}</md-switch>
+    <!--TODO Change Email-->
+    <!--TODO Theme Colors-->
+    <div layout="row" ng-repeat="themeColor in themeColors">
+        <div flex><md-switch aria-label="pick theme">{{themeColor}}</md-switch></div>
+    </div>
+    <!--<div layout="row" ng-repeat="color in themeColors">-->
+      <!---->
+      <!--<md-checkbox>{{ color }}</md-checkbox>-->
+      <!--<br ng-show="($index+1)%4==0" />-->
+    <!--</div>-->
+
+  </md-list>
+</md-bottom-sheet>

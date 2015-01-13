@@ -1,0 +1,143 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title></title>
+  <meta name="description" content="">
+  <meta name="viewport" content="width=device-width">
+  <!-- Place favicon.ico and apple-touch-icon.png in the root directory -->
+  <!-- build:css(.) styles/vendor.css -->
+  <!-- bower:css -->
+  <link rel="stylesheet" href="bower_components/bootstrap/dist/css/bootstrap.css" />
+  <link rel="stylesheet" href="styles/auth.css"/>
+  <!-- endbower -->
+  <!-- endbuild -->
+  <!-- build:css(.tmp) styles/main.css -->
+  <link rel="stylesheet" href="styles/main.css">
+  <link rel="stylesheet" href="styles/summary.css">
+  <link rel="stylesheet" href="styles/model.css">
+  <!-- endbuild -->
+</head>
+<body>
+<!--[if lt IE 7]>
+<p class="browsehappy">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience.</p>
+<![endif]-->
+
+<!-- Add your site or application content here -->
+<div class="container">
+  <div class="header">  </div>
+
+  <section id="login">
+    <div class="container">
+      <div class="row">
+        <div class="col-xs-12">
+          <div class="form-wrap">
+            <h1>Log in with your email account</h1>
+
+            <form role="form" action="javascript:;" method="post" id="loginForm" autocomplete="off">
+              <div class="form-group">
+                <label for="emailInput" class="sr-only">Email</label>
+                <input type="email" id="emailInput" class="form-control" placeholder="somebody@example.com">
+              </div>
+              <div class="form-group">
+                <label for="passwordInput" class="sr-only">Password</label>
+                <input type="password" id="passwordInput" class="form-control" placeholder="Password">
+              </div>
+              <div class="checkbox">
+                <span class="character-checkbox" onclick="showPassword()"></span>
+                <span class="label">Show password</span>
+              </div>
+              <input type="submit" id="btn-login" class="btn btn-custom btn-lg btn-block" value="Log in">
+            </form>
+          </div>
+        </div> <!-- /.col-xs-12 -->
+      </div> <!-- /.row -->
+    </div> <!-- /.container -->
+  </section>
+
+  <div class="footer">  </div>
+</div>
+
+<!-- build:js(.) scripts/oldieshim.js -->
+<!--[if lt IE 9]>
+<script src="bower_components/es5-shim/es5-shim.js"></script>
+<script src="bower_components/json3/lib/json3.js"></script>
+<![endif]-->
+<!-- endbuild -->
+
+<!-- build:js(.) scripts/vendor.js -->
+<!-- bower:js -->
+<script src="bower_components/jquery/dist/jquery.js"></script>
+<script src="bower_components/angular/angular.js"></script>
+<script src="bower_components/bootstrap/dist/js/bootstrap.js"></script>
+<script src="bower_components/angular-resource/angular-resource.js"></script>
+<script src="bower_components/angular-cookies/angular-cookies.js"></script>
+<script src="bower_components/angular-sanitize/angular-sanitize.js"></script>
+<script src="bower_components/angular-animate/angular-animate.js"></script>
+<script src="bower_components/angular-touch/angular-touch.js"></script>
+<script src="bower_components/angular-route/angular-route.js"></script>
+<script src="bower_components/jquery-ui/jquery-ui.js"></script>
+<script src="bower_components/angular-bootstrap/ui-bootstrap-tpls.js"></script>
+<!-- endbower -->
+<!-- endbuild -->
+
+<!-- build:js({.tmp,app}) scripts/scripts.js -->
+<script src="scripts/app.js"></script>
+<script src="scripts/controllers/compare.js"></script>
+<script src="scripts/controllers/login.js"></script>
+<script src="scripts/controllers/model.js"></script>
+<script src="scripts/controllers/summary.js"></script>
+<!-- endbuild -->
+</body>
+
+<script>
+  // ===============================================================
+  // This function retrieves the supplied username and password and
+  // calls a php script on the server to validate the credentials
+  // ===============================================================
+  $('#loginForm').submit(function() {
+    var email = document.getElementById("emailInput").value;
+    var password = document.getElementById("passwordInput").value;
+    var credentials = new Array();
+    credentials[0] = email;
+    credentials[1] = password;
+    var creds_json = JSON.stringify(credentials);
+
+    alert("Auth: " + email + " - " + password);
+
+//    $.ajax({
+//      type: 'post',
+//      url: 'http://localhost:8888/senior-design-server/login.php',
+//      data: creds_json,
+//      success: function(data) {
+//        if (data === "success") {
+//          alert('login successful');
+//        } else {
+//          alert('login failed');
+//        }
+//      }
+//    });
+
+    return false;
+  });
+
+  function showPassword() {
+
+    var key_attr = $('#passwordInput').attr('type');
+
+    if(key_attr != 'text') {
+
+      $('.checkbox').addClass('show');
+      $('#passwordInput').attr('type', 'text');
+
+    } else {
+
+      $('.checkbox').removeClass('show');
+      $('#passwordInput').attr('type', 'password');
+
+    }
+
+  };
+</script>
+
+</html>

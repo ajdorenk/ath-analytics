@@ -1,0 +1,104 @@
+<style type="text/css">#divTableSummary table, .stats {
+    width: 100%
+}
+#divTableSummary th, .stats tr td {
+    width: 25%;
+}
+
+.chart {
+    background: #eee;
+    padding: 3px;
+}
+
+.chart div {
+    width: 0;
+    transition: all 1s ease-out;
+    -moz-transition: all 1s ease-out;
+    -webkit-transition: all 1s ease-out;
+}
+
+.chart div {
+    font: 10px sans-serif;
+    background-color: steelblue;
+    text-align: right;
+    padding: 3px;
+    margin: 5px;
+    color: white;
+    box-shadow: 2px 2px 2px #666;
+}</style> <style>html,body {
+    height: 100%;
+    min-height: 100%;
+    margin: 0;
+    padding: 0;
+}
+
+#topbar {
+    position: fixed;
+    width: 100%;
+    background: #428bca;
+    padding-top: 10px;
+    padding-left: 1%;
+    height: 55px;
+    z-index: 10;
+}
+
+.content {
+    margin: 0px;
+    width: 100%;
+    padding-top: 55px;
+    padding-bottom: 100px;
+    height: 100%;
+}
+
+#graph {
+    right: 0;
+    padding-top: 0px;
+    padding-bottom: 0px;
+    width: 100%;
+    z-index: 8;
+}
+
+#bottombar {
+    right: 0;
+    bottom: 0;
+    width: 100%
+}
+
+.container-outer { overflow: scroll; width: 100%; }
+.container-inner {  }</style> <script type="text/javascript">//  var playersList = ['Greg Hart', 'Austin Dorenkamp', 'Ian Richardson', 'Matt Johnson', 'Jeremiah Janney'];
+
+//  var players = new Bloodhound({
+//      datumTokenizer: Bloodhound.tokenizers.obj.whitespace('value'),
+//      queryTokenizer: Bloodhound.tokenizers.whitespace,
+//      local: $.map(playersList, function(playerName) { return { value: playerName }; })
+//  });
+//
+//  //kicks off the bloodhound info retrieval
+//  players.initialize();
+//
+//  $('#playerQuery .typeahead').typeahead({
+//      hint: true,
+//      highlight: true,
+//      minLength: 1
+//  },
+//  {
+//      name: 'playerName',
+//      displayKey: 'value',
+//      source: players.ttAdapter() /* `ttAdapter` wraps the suggestion engine to make compatible with typeahead */
+//  });</script> <!--
+<p class="input-group" ng-repeat="card in playercards">
+      <input type="text" ng-style="{'background-color':card.color}" class="form-control" id="card-key">
+      <input type="text" ng-model="card.name" class="form-control" id="card">
+      <span class="input-group-btn">
+        <button class="btn btn-danger" ng-click="removeCard($index)" aria-label="Remove" id="card-remove">X</button>
+      </span>
+    </p>
+
+    <md-toolbar md-theme="indigo" class="md-medium-tall">
+              <span><img ng-src="images/yeoman.png" class="face" alt="JohnSnow"></span>
+            </md-toolbar>
+
+    <div flex>
+        <md-button class="md-raised md-primary" ng-click="addSeries()" md-theme="indigo">Add</md-button>
+    </div>
+--> <div class="container-outer"> <div class="container-inner"> <div layout="row"> <div flex="20" ng-if="playerCards.length > 0"> <md-card style="background: {{playerCards[0].seriesInfo.color}}"> <md-item-content style="background: white"> <div class="md-tile-left"> <img ng-src="images/yeoman.png" class="face" alt="JohnSnow"> </div> <div class="md-tile-content"> <h3>{{playerCards[0].playerInfo.name}}</h3> <h4>{{playerCards[0].playerInfo.position}} {{playerCards[0].playerInfo.route}} | {{playerCards[0].playerInfo.number}}</h4> </div> <md-button> <i class="fa fa-close" ng-click="removePlayerCard(0)"></i> </md-button> </md-item-content> </md-card> </div> <div flex="20" ng-if="playerCards.length > 1"> <md-card style="background: {{playerCards[1].seriesInfo.color}}"> <md-item-content style="background: white"> <div class="md-tile-left"> <img ng-src="images/yeoman.png" class="face" alt="JohnSnow"> </div> <div class="md-tile-content"> <h3>{{playerCards[1].playerInfo.name}}</h3> <h4>{{playerCards[1].playerInfo.position}} {{playerCards[1].playerInfo.route}} | {{playerCards[1].playerInfo.number}}</h4> </div> <md-button> <i class="fa fa-close" ng-click="removePlayerCard(1)"></i> </md-button> </md-item-content> </md-card> </div> <div flex="20" ng-if="playerCards.length > 2"> <md-card style="background: {{playerCards[2].seriesInfo.color}}"> <md-item-content style="background: white"> <div class="md-tile-left"> <img ng-src="images/yeoman.png" class="face" alt="JohnSnow"> </div> <div class="md-tile-content"> <h3>{{playerCards[2].playerInfo.name}}</h3> <h4>{{playerCards[2].playerInfo.position}} {{playerCards[2].playerInfo.route}} | {{playerCards[2].playerInfo.number}}</h4> </div> <md-button> <i class="fa fa-close" ng-click="removePlayerCard(2)"></i> </md-button> </md-item-content> </md-card> </div> <div flex="20" ng-if="playerCards.length > 3"> <md-card style="background: {{playerCards[3].seriesInfo.color}}"> <md-item-content style="background: white"> <div class="md-tile-left"> <img ng-src="images/yeoman.png" class="face" alt="JohnSnow"> </div> <div class="md-tile-content"> <h3>{{playerCards[3].playerInfo.name}}</h3> <h4>{{playerCards[3].playerInfo.position}} {{playerCards[3].playerInfo.route}} | {{playerCards[3].playerInfo.number}}</h4> </div> <md-button> <i class="fa fa-close" ng-click="removePlayerCard(3)"></i> </md-button> </md-item-content> </md-card> </div> <div flex="20" ng-if="playerCards.length > 4"> <md-card style="background: {{playerCards[4].seriesInfo.color}}"> <md-item-content style="background: white"> <div class="md-tile-left"> <img ng-src="images/yeoman.png" class="face" alt="JohnSnow"> </div> <div class="md-tile-content"> <h3>{{playerCards[4].playerInfo.name}}</h3> <h4>{{playerCards[4].playerInfo.position}} {{playerCards[4].playerInfo.route}} | {{playerCards[4].playerInfo.number}}</h4> </div> <md-button> <i class="fa fa-close" ng-click="removePlayerCard(4)"></i> </md-button> </md-item-content> </md-card> </div> <!--Typeahead Card--> <div flex="20" ng-if="playerCards.length <= 4"> <md-card style="background: green"> <md-item-content style="background: white"> <div class="md-tile-content"> <form role="form-inline" ng-submit="addPlayerCard(selectedPlayer)" flex> <div layout="row" flex="100"> <div flex="80"> <angucomplete-alt ng-controller="TypeaheadCtrl" ng-show="currentUser" hide-sm id="ex1" placeholder="Search Players" pause="100" selected-object="selectedPlayer" local-data="players.wideReceivers.players" search-fields="name" title-field="name" minlength="1" input-class="form-control form-control-small"></angucomplete-alt> </div> <div flex="10"> <md-button type="submit" class="md-raised md-primary" md-theme="indigo">Add</md-button> </div> </div> </form> </div> </md-item-content> </md-card> </div> <div flex ng-show="maximizedHeader"> <md-button class="md-raised" aria-label="minimize player info" ng-click="maximizedHeader = !maximizedHeader" style="float: right"> <i class="fa fa-minus"></i> </md-button> </div> <div flex ng-show="!maximizedHeader"> <md-button class="md-raised" aria-label="expland player info" ng-click="maximizedHeader = !maximizedHeader" style="float: right"> <i class="fa fa-plus"></i> </md-button> </div> </div> </div> </div> <!--TODO: MAKE DIRECTIVE BIND TO WINDOW RESIZE EVENT--> <div id="graph" ng-style="{ 'height' : height}"> <linechart data="data" options="options" mode=""></linechart> </div>

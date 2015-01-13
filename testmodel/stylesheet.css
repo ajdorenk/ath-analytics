@@ -1,0 +1,12 @@
+#model_wrap {
+	display: inline-block;
+	width: 1000px;
+	height: inherit;
+}
+
+#model {
+    border: 1px dotted black;
+	width: 50%;
+	height: 56.25%;
+	right: 0;
+}

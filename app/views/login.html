@@ -1,0 +1,35 @@
+<section id="login">
+  <div class="container">
+    <div class="row">
+      <div class="col-xs-12">
+        <div class="form-wrap" ng-controller="ApplicationCtrl">
+          <h1>Log in with your username</h1>
+
+          <form autocomplete="off" ng-submit="login(credentials, $event)">
+            <md-text-float label="Username" type="text" ng-model="credentials.username" required></md-text-float>
+            <md-text-float ng-hide="showpassword" label="Password" type="password" ng-model="credentials.password" required></md-text-float>
+            <md-text-float ng-show="showpassword" label="Password" type="text" ng-model="credentials.password" required></md-text-float>
+            <md-checkbox ng-click="showpassword = !showpassword" aria-label="Show Password">SHOW PASSWORD</md-checkbox>
+            <md-button class="md-raised" aria-label="log in">Log in</md-button>
+          </form>
+          <br>
+          <md-button class="md-raised" ng-click="auth_bypass($event, 'coach')" aria-label="auth bypass (coach)">Auth Bypass (coach)</md-button>
+          <br>
+          <br>
+          <md-button class="md-raised" ng-click="auth_bypass($event, 'player')" aria-label="auth bypass (player)">Auth Bypass (player)</md-button>
+        </div>
+        <!--<div class="form-wrap" ng-if="currentUser">-->
+          <!--<h1>Current User Information</h1>-->
+          <!--&lt;!&ndash;<h3>Session username: {{Session.username}}</h3>&ndash;&gt;-->
+          <!--<h3>First name: {{currentUser.first}}</h3>-->
+          <!--<h3>Last name: {{currentUser.last}}</h3>-->
+          <!--<h3>Role: {{currentUser.role}}</h3>-->
+          <!--<md-button class="md-raised" aria-label="log out" ng-click="logout();">Log out</md-button>-->
+          <!--<md-text-float class="" label="testing" ng-model="user"></md-text-float>-->
+        <!--</div>-->
+      </div> <!-- /.col-xs-12 -->
+    </div> <!-- /.row -->
+  </div> <!-- /.container -->
+</section>
+<footer><br><b>[ AUTH BYPASS (COACH) ]</b> logs in w/ username=“prhoads” and password=“rhoadspaul”</footer>
+<footer><br><b>[ AUTH BYPASS (PLAYER) ]</b> logs in w/ username=“jwest” and password=“westjarvis”</footer>

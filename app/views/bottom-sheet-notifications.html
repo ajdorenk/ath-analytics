@@ -1,0 +1,29 @@
+<md-bottom-sheet class="md-list md-has-header">
+  <div layout="row">
+    <div flex="90"></div>
+    <!--TODO Clear Notifications Animation-->
+    <div flex="5"><md-button aria-label="clear notifications" ng-click="clearNotifications()">
+      <md-icon icon="images/ic_clear_all_24px.svg"></md-icon>
+    </md-button></div>
+    <div flex="5"><md-button style="float: right;" aria-label="Close Notifications" ng-click="closeBottom()">
+      Close<i class="fa fa-close" style="padding-left: 5%"></i>
+    </md-button></div>
+  </div>
+  <div layout="row" layout-align="end end">
+      <md-card ng-repeat="notification in getNotifications(5)" style="position: relative;">
+        <div><span>{{notification.date | date : format : shortDate}}<br>{{notification.text}}</span></div>
+        <!--TODO Clear Notification Function-->
+        <md-button style="position: absolute;top: 0px; right: 0px;" aria-label="clear notification" ng-click="removeNotification($index)">
+          <i class="fa fa-close"></i>
+        </md-button>
+        <div layout="row">
+          <md-button aria-label="View Route"><i class="fa fa-eye"></i><md-tooltip>View Route</md-tooltip></md-button>
+          <md-button aria-label="Give Player Feedback"><i class="fa fa-comment-o"></i><md-tooltip>Give Player Feedback</md-tooltip></md-button>
+          <md-button aria-label="Bookmark for Later Review"><i class="fa fa-bookmark"></i><md-tooltip>Bookmark for Later Review</md-tooltip></md-button>
+          <md-button aria-label="Share with Another Coach"><i class="fa fa-share-alt"></i><md-tooltip>Share with Another Coach</md-tooltip></md-button>
+        </div>
+      </md-card>
+
+
+  </div>
+</md-bottom-sheet>

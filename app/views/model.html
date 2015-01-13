@@ -1,0 +1,357 @@
+<!--Player Selection Sidebar-->
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="leftPlayer" md-is-locked-open="$media('md')">
+  <md-content>
+    <md-item ng-repeat="position in positions">
+      <md-item-content>
+        <h2 ng-click="show(position);">{{position | camelCaseToHuman}}</h2>
+        <md-list>
+          <md-item ng-repeat="player in wideReceivers">
+            <md-item-content>
+              <a ng-click="selectPlayer(player.id);">#{{player.number}}: {{player.name}} ({{player.route}})</a>
+            </md-item-content>
+          </md-item>
+        </md-list>
+      </md-item-content>
+    </md-item>
+  </md-content>
+</md-sidenav>
+
+<!--Roster Selection Sidebar-->
+<md-sidenav class="md-sidenav-left md-whiteframe-z2" md-component-id="leftRoute" md-is-locked-open="$media('md')">
+  <md-content>
+    <md-item ng-repeat="position in positions">
+      <md-item-content>
+        <h2 ng-click="show(position);">{{position | camelCaseToHuman}}</h2>
+        <md-list>
+          <md-item ng-repeat="player in wideReceivers">
+            <md-item-content>
+              <a ng-click="selectPlayer(player.id);">#{{player.number}}: {{player.name}} ({{player.route}})</a>
+            </md-item-content>
+          </md-item>
+        </md-list>
+      </md-item-content>
+    </md-item>
+  </md-content>
+</md-sidenav>
+
+<!--TODO When minimized show the player name, number and position-->
+<!--Data binding of player data-->
+  <div layout="row" layout-sm="column">
+    <div flex="25">
+      <img id="playerPic" src="images/yeoman.png">
+      <br>
+      <label>Change Player</label>
+    </div>
+    <div flex="25" id="playerInfo">
+      <label style="font-size: 30px">{{player.name}}</label><br>
+      <label>#{{player.number}} {{player.position}} ({{player.route}})</label><br>
+      <label>{{player.ht}}, {{player.wt}} lbs</label><br>
+      <label>Born: </label><label>{{player.birth}}</label><br>
+      <label>Year: </label><label>{{player.year}}</label>
+    </div>
+    <div flex="15"></div>
+    <div flex="15">
+      <label>Route Quality</label>
+      <progress-arc
+        size="125"
+        complete="0.76">
+      </progress-arc>
+    </div>
+    <div flex="20">
+      <md-button class="md-raised" style="float: right;">
+        <i class='fa fa-minus'></i>
+      </md-button>
+    </div>
+  </div>
+
+<!--<div id="divTableSummary">-->
+  <!--<md-tabs md-selected="selectedIndex">-->
+    <!--<md-tab ng-click="byPlayer()" ng-disabled="tab.disabled" label='Date/Player/Route'></md-tab>-->
+    <!--<md-tab ng-click="byRoute()" ng-disabled="tab.disabled" label='Date/Route/Player'></md-tab>-->
+  <!--</md-tabs>-->
+<!--</div>-->
+
+<!--TODO When minimized just show currently selected filters-->
+<md-toolbar>
+  <div layout="row" layout-sm="column">
+    <div flex>
+      <h3 style="margin-top: -0.5%;padding-left: 15%">Date</h3>
+      <quick-datepicker ng-model='date1' disable-timepicker='true' style="padding-left: 15%;padding-bottom: 7%;margin-top: -5%"></quick-datepicker>
+    </div>
+    <div flex>
+      <h3 style="margin-top: -0.5%;">Route Type</h3>
+      <div dropdown-select="ddRoutes"
+           dropdown-model="ddSelectedRoute"
+           dropdown-item-label="text" style="float: left;margin-top: -5%;">
+      </div>
+      <br>
+    </div>
+    <div flex>
+      <h3 style="margin-top: -0.5%;">Available Players</h3>
+      <div dropdown-select="ddPlayers"
+           dropdown-model="ddSelectedPlayer"
+           dropdown-item-label="text" style="float: left;margin-top: -5%;">
+      </div>
+      <br>
+    </div>
+    <div flex>
+      <h3 style="margin-top: -0.5%;">On Screen Metric</h3>
+      <div dropdown-select="ddMetrics"
+           dropdown-model="ddSelectedMetric"
+           dropdown-item-label="text" style="float: left;margin-top: -5%;">
+      </div>
+      <br>
+    </div>
+    <div flex>
+      <md-button class="md-raised" style="float: right;">
+        <i class='fa fa-minus'></i>
+      </md-button>
+    </div>
+  </div>
+</md-toolbar>
+
+<!--<tabset>-->
+  <!--<tab heading="Date/Player/Route">-->
+    <!--<div style="width: 200px; min-height: 800px; float:left;">-->
+
+      <!--<div class="col-md-6" ng-controller="DatepickerCtrl">-->
+        <!--<p class="input-group">-->
+          <!--<label>Date:</label>-->
+          <!--<input type="text" class="form-control" style="width: 150px;" datepicker-popup="{{format}}" ng-click="open($event)"-->
+                 <!--ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'"-->
+                 <!--datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"-->
+                 <!--close-text="Close"/>-->
+        <!--</p>-->
+      <!--</div>-->
+      <!--<br>-->
+      <!--<br>-->
+      <!--<br>-->
+      <!--<br>-->
+
+      <!--<div>-->
+        <!--<accordion>-->
+          <!--<accordion-group ng-click="wideDown = !wideDown">-->
+            <!--<accordion-heading>-->
+              <!--Wide Receivers <i style="float: right"-->
+                                <!--ng-class="wideDown ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'"></i>-->
+            <!--</accordion-heading>-->
+
+            <!--<div ng-repeat="player in wideReceivers">-->
+              <!--&lt;!&ndash;TODO Clicking on player will change the current data bindings of the summary&ndash;&gt;-->
+              <!--<a ng-click="selectPlayer({{player.id}})">#{{player.number}}: {{player.name}} ({{player.route}})</a>-->
+            <!--</div>-->
+          <!--</accordion-group>-->
+          <!--<accordion-group ng-click="runDown = !runDown">-->
+            <!--<accordion-heading>-->
+              <!--Running Backs <i style="float: right"-->
+                               <!--ng-class="runDown ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'"></i>-->
+            <!--</accordion-heading>-->
+
+            <!--<div ng-repeat="player in runningBacks">-->
+              <!--<a ng-click="selectPlayer({{player.id}})">#{{player.number}}: {{player.name}}</a>-->
+            <!--</div>-->
+          <!--</accordion-group>-->
+          <!--<accordion-group ng-click="tightDown = !tightDown">-->
+            <!--<accordion-heading>-->
+              <!--Tight Ends <i style="float: right"-->
+                            <!--ng-class="tightDown ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'"></i>-->
+            <!--</accordion-heading>-->
+
+            <!--<div ng-repeat="player in tightEnds">-->
+              <!--<a ng-click="selectPlayer({{player.id}})">#{{player.number}}: {{player.name}}</a>-->
+            <!--</div>-->
+          <!--</accordion-group>-->
+        <!--</accordion>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div id="buttonList">-->
+      <!--<div id="playerInformation" style="width: 250px;float: left;">-->
+        <!--<label id="playerNA" style="padding-top: 20px;font-size: 20px">{{player.name}}</label>-->
+        <!--<br>-->
+        <!--<label>#{{player.number}} {{player.position}} ({{player.route}})</label>-->
+        <!--<br>-->
+      <!--</div>-->
+
+      <!--<table>-->
+        <!--<tr>-->
+          <!--<td>-->
+            <!--<p id="routeName"></p>-->
+          <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>-->
+
+            <!--<div class="btn-group" dropdown is-open="status.isopen" style="padding-bottom: 10px">-->
+              <!--<button type="button" class="btn btn-primary dropdown-toggle" ng-disabled="disabled">-->
+                <!--{{currentRoute}}<span class="caret"></span>-->
+              <!--</button>-->
+              <!--<ul class="dropdown-menu">-->
+                <!--<li ng-repeat="choice in routesForDropdown">-->
+                  <!--<a ng-click="$parent.currentRoute = choice">{{choice}}</a>-->
+                <!--</li>-->
+              <!--</ul>-->
+            <!--</div>-->
+
+          <!--</td>-->
+        <!--</tr>-->
+      <!--</table>-->
+
+      <!--<form action="">-->
+        <!--<input id ="posRadio" type="radio" name="graphType" value="Position Graph" checked="checked">Position <br>-->
+        <!--<input id ="velRadio" type="radio" name="graphType" value="Velocity Graph" >Velocity<br>-->
+        <!--<input id ="aclRadio" type="radio" name="graphType" value="Acceleration Graph">Acceleration<br>-->
+      <!--</form>-->
+    <!--</div>-->
+  <!--</tab>-->
+  <!--<tab heading="Date/Route/Player">-->
+    <!--<div style="width: 200px; min-height: 800px; float:left;">-->
+
+      <!--<div class="col-md-6" ng-controller="DatepickerCtrl">-->
+        <!--<p class="input-group">-->
+          <!--<label>Date:</label>-->
+          <!--<input type="text" class="form-control" style="width: 150px;" datepicker-popup="{{format}}" ng-click="open($event)"-->
+                 <!--ng-model="dt" is-open="opened" min-date="minDate" max-date="'2015-06-22'"-->
+                 <!--datepicker-options="dateOptions" date-disabled="disabled(date, mode)" ng-required="true"-->
+                 <!--close-text="Close"/>-->
+        <!--</p>-->
+      <!--</div>-->
+      <!--<br>-->
+      <!--<br>-->
+      <!--<br>-->
+      <!--<br>-->
+
+      <!--<div>-->
+        <!--<accordion>-->
+          <!--<accordion-group ng-click="slantDown = !slantDown">-->
+            <!--<accordion-heading>-->
+              <!--Slant Routes <i style="float: right"-->
+                                <!--ng-class="slantDown ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'"></i>-->
+            <!--</accordion-heading>-->
+
+            <!--<div ng-repeat="route in slantRoutes">-->
+              <!--&lt;!&ndash;TODO Clicking on player will change the current data bindings of the summary&ndash;&gt;-->
+              <!--<a ng-click="selectRoute({{route.id}})">{{route.name}} </a>-->
+            <!--</div>-->
+          <!--</accordion-group>-->
+          <!--<accordion-group ng-click="deepDown = !deepDown">-->
+            <!--<accordion-heading>-->
+              <!--Deep Routes <i style="float: right"-->
+                               <!--ng-class="deepDown ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'"></i>-->
+            <!--</accordion-heading>-->
+
+            <!--<div ng-repeat="route in deepRoutes">-->
+              <!--<a ng-click="selectRoute({{route.id}})">{{route.name}}</a>-->
+            <!--</div>-->
+          <!--</accordion-group>-->
+          <!--<accordion-group ng-click="cornerDown = !cornerDown">-->
+            <!--<accordion-heading>-->
+              <!--Corner Routes <i style="float: right"-->
+                            <!--ng-class="cornerDown ? 'glyphicon glyphicon-chevron-down' : 'glyphicon glyphicon-chevron-right'"></i>-->
+            <!--</accordion-heading>-->
+
+            <!--<div ng-repeat="route in cornerRoutes">-->
+              <!--<a ng-click="selectRoute({{route.id}})">{{route.name}}</a>-->
+            <!--</div>-->
+          <!--</accordion-group>-->
+        <!--</accordion>-->
+      <!--</div>-->
+    <!--</div>-->
+
+    <!--<div id="buttonList2">-->
+      <!--<div id="playerInformation2" style="width: 250px;float: left;">-->
+        <!--<label id="playerNA2" style="padding-top: 20px;font-size: 20px">{{player.name}}</label>-->
+        <!--<br>-->
+        <!--<label>#{{player.number}} {{player.position}} ({{player.route}})</label>-->
+        <!--<br>-->
+
+
+        <!--<form action="">-->
+          <!--<input id ="posRadio2" type="radio" name="graphType" value="Position Graph" checked="checked">Position <br>-->
+          <!--<input id ="velRadio2" type="radio" name="graphType" value="Velocity Graph" >Velocity<br>-->
+          <!--<input id ="aclRadio2" type="radio" name="graphType" value="Acceleration Graph">Acceleration<br>-->
+        <!--</form>-->
+
+
+      <!--</div>-->
+      <!--<table>-->
+        <!--<tr>-->
+          <!--<td>-->
+            <!--<p id="routeName2"></p>-->
+          <!--</td>-->
+        <!--</tr>-->
+        <!--<tr>-->
+          <!--<td>-->
+
+          <!--</td>-->
+        <!--</tr>-->
+      <!--</table>-->
+
+
+    <!--</div>-->
+  <!--</tab>-->
+
+<!--</tabset>-->
+
+<!-- TODO: NEED HELP ADJUSTING STYLE POSITIONING FOR THIS ELEMENT -->
+<div id="model_wrap" layout="row" style="position:relative;">
+  <div>
+    <canvas id="model" ng-controller="ModelCtrl">
+        Your browser does not support html canvas.
+    </canvas>
+  </div>
+  <div style="position: absolute;top: 0px; right: 0px;">
+    <!--TODO Change player to have the route data and use data binding-->
+    <!--TODO Change to cards?-->
+    <div layout="row">
+      <md-card flex="50">
+        <h2>Overall Quality</h2><span>89%</span>
+      </md-card>
+      <md-card flex="50">
+        <h2>Top Speed</h2><span>6 m/s</span>
+      </md-card>
+    </div>
+    <div layout="row">
+      <md-card flex="50">
+        <h2>Average Speed</h2><span>5.5 m/s</span>
+      </md-card>
+      <md-card flex="50">
+        <h2>3-Step Accel</h2><span>2 m/s^2</span>
+      </md-card>
+    </div>
+    <div layout="row">
+      <md-card flex="50">
+        <h2>Route Time</h2><span>4 sec</span>
+      </md-card>
+      <md-card flex="50">
+        <h2>Route Length</h2><span>30 yards</span>
+      </md-card>
+    </div>
+      <!--<div layout="row">-->
+        <!--<div flex><h2>Overall Quality</h2></div>-->
+        <!--<div flex><h2>Top Speed</h2></div>-->
+        <!--<div flex><h2>Average Speed</h2></div>-->
+        <!--<div flex><h2>3-Step Acceleration</h2></div>-->
+      <!--</div>-->
+      <!--<div layout="row">-->
+        <!--<div flex><span>89%</span></div>-->
+        <!--<div flex><span>6 m/s</span></div>-->
+        <!--<div flex><span>5.5 m/s</span></div>-->
+        <!--<div flex><span>2 m/s^2</span></div>-->
+      <!--</div>-->
+      <!--<div layout="row">-->
+        <!--<div flex><h2>Route Time</h2></div>-->
+        <!--<div flex><h2>Route Length</h2></div>-->
+        <!--<div flex><h2>Stat 3</h2></div>-->
+        <!--<div flex><h2>Stat 4</h2></div>-->
+      <!--</div>-->
+      <!--<div layout="row">-->
+        <!--<div flex><span>4 sec</span></div>-->
+        <!--<div flex><span>30 yards</span></div>-->
+        <!--<div flex><span>69%</span></div>-->
+        <!--<div flex><span>420</span></div>-->
+      <!--</div>-->
+  </div>
+</div>
+
+

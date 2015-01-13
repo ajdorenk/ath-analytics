@@ -1,0 +1,95 @@
+md-toolbar {
+  min-height: 45px;
+}
+
+#NavBar {
+  position: relative;
+}
+
+#NavBar .md-fab {
+  height: 90%;
+}
+
+#leftNavToggle {
+  float: left;
+}
+
+#rightSideBar {
+  min-height: 48px;
+}
+
+.recentActivityCard {
+  height: 20%;
+}
+
+.recentActivityCard h2, label {
+  position: relative;
+  bottom: 1em;
+}
+
+.recentActivityCard label {
+  white-space: normal;
+  font-size: 12px;
+  bottom: 2em;
+}
+
+.recentActivityCard div {
+  position: relative;
+  bottom: 1.3em;
+}
+
+#fabButtons .md-fab {
+  z-index: 3;
+}
+
+#fabButtons i {
+  color: white;
+}
+
+#fabAction, #saveView, #addPlayer, #addRoute {
+  position: fixed;
+  bottom: 35px;
+  right: 20px;
+}
+
+#saveView {
+  bottom: 95px;
+}
+
+#addPlayer {
+  bottom: 155px;
+}
+
+#addRoute {
+  bottom: 215px;
+}
+
+h2, label {
+  white-space: nowrap;
+  font-size: 14px;
+  font-weight: 500;
+  text-transform: uppercase;
+}
+
+#main_complete {
+  font-size: 14px;
+  font-weight: 500;
+}
+
+.noti_bubble {
+  position: relative;    /* This breaks the div from the normal HTML document. */
+  bottom: 2em;
+  right: 1.5em;
+  padding:1px 2px 1px 2px;
+  background-color:red; /* you could use a background image if you'd like as well */
+  color:white;
+  font-weight:bold;
+  font-size:0.55em;
+
+  /* The following is CSS3, but isn't crucial for this technique to work. */
+  /* Keep in mind that if a browser doesn't support CSS3, it's fine! They just won't have rounded borders and won't have a box shadow effect. */
+  /* You can always use a background image to produce the same effect if you want to, and you can use both together so browsers without CSS3 still have the rounded/shadow look. */
+  border-radius:30px;
+  box-shadow:1px 1px 1px gray;
+}
+
